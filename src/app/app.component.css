@@ -1,0 +1,9 @@
+.myDiv {
+  width: 150px;
+  height: 150px;
+  border: solid 1px;
+}
+.imgs{
+  border-radius: 100px;
+  margin: 5px;
+}
