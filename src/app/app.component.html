@@ -1,41 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="row">
-      <div class="form-group">
-        <label for="imgWidth">image width</label>
-        <input id="imgWidth" [(ngModel)]="imgWidth" type="number" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="imgHieght">image height</label>
-        <input id="imgHieght" [(ngModel)]="imgHieght" type="number" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="dueTime">dueTime</label>
-        <input id="dueTime" [(ngModel)]="dueTime" type="number" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="period">period</label>
-        <input id="period" [(ngModel)]="period" type="number" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="period">repeate</label>
-        <input id="repeate" [(ngModel)]="repeate" type="number" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="posCounter">Current Steps</label>
-        <input id="posCounter" disabled [ngModel]="posCounter" type="number" class="form-control">
-      </div>
-      <button class="btn btn-primary" (click)="getImages()">Get Images</button>
-      <button class="btn btn-success" (click)="start()">Start</button>
-    </div>
-    <div *ngIf="images" class="row">
-      <div *ngFor="let image of images" class="col-md-12">
-        <img class="imgs" @movementtrigger="posCounter" [src]='image.imgUrl' alt="">
-        <!-- <button class="btn btn-default" (click)="">Stop</button> -->
-      </div>
-    </div>
-    <!-- <img @movementtrigger="posCounter" [src]='imgUrl' alt="">
-      <img @movementtrigger="posCounter" [src]='imgUrl' alt="">
-      <img @movementtrigger="posCounter" [src]='imgUrl' alt=""> -->
+    <animated-images></animated-images>
   </div>
 </div>

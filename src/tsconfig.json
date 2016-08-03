@@ -15,9 +15,14 @@
     "target": "es5",
     "inlineSources": true
   },
-
+  "filesGlob": [
+    "./app/**/*.ts"
+  ],
   "files": [
     "main.ts",
     "typings.d.ts"
-  ]
+  ],
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }
