@@ -1,5 +1,7 @@
-import { Component, trigger, state, style, transition, animate, Input } from '@angular/core';
-import { Translate } from '../animations/animations.service';
+import {Component, trigger, state, style, transition, animate, Input, OnDestroy} from '@angular/core';
+import {Translate} from '../animations/animations.service';
+import {Observable} from 'rxjs/Rx';
+import {AnimateEvent, AnimateEventParameter} from '../animations/animate.event';
 
 @Component({
   selector: 'animated-img',
@@ -24,21 +26,27 @@ import { Translate } from '../animations/animations.service';
         animate('100ms shake')
       ])
     ])
-  ]
+  ],
+  providers: [AnimateEvent]
 })
-export class AnimatedImage {
+export class AnimatedImage implements OnDestroy {
   @Input() imgUrl: string;
-  @Input() animationType: string;
-  private currentState: number;
-  private posCounter: number = 1;
+  @Input() animationType: string = 'random';
+  currentState: number = 2;
+  observableSource: any;
+  repeate: number = 4;
+  dueTime: number = 100;
+  period: number = 100;
+  startAnimateing: any;
 
-  constructor() {
+  constructor(private _animateEvent: AnimateEvent) {
     if (this.animationType == 'random') {
       this.currentState = this.getRandomArbitrary(1, 4);
     }
-    else {
-      this.currentState = 1;
-    }
+
+    this._animateEvent.on().subscribe(animationParameter => {
+      this.animate(animationParameter);
+    });
   }
 
   /// Returns a random number between min (inclusive) and max (exclusive)
@@ -47,13 +55,27 @@ export class AnimatedImage {
   }
 
   next() {
-    if (this.posCounter >= 4)
+    if (this.currentState >= 4)
       this.resetCounter();
     else
-      this.posCounter++;
+      this.currentState++;
+  }
+
+  animate(animationParameter: AnimateEventParameter) {
+    this.observableSource = Observable.timer(this.dueTime, this.period)
+      .take(this.repeate);
+    this.startAnimateing = this.observableSource.subscribe(val => {
+      this.next();
+    }, err => { },
+      () => { });
   }
 
   resetCounter() {
-    this.posCounter = 1;
+    this.currentState = 1;
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.startAnimateing.unsubscribe();
   }
 }
