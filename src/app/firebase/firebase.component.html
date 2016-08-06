@@ -1,0 +1,8 @@
+<div>firebase component</div>
+<ul>
+  <li *ngFor="let item of friends | async">
+    {{ item.name }}
+  </li>
+</ul>
+<input type="text" [(ngModel)]="name" />
+<button class="btn" (click)="addNew({name: name})">Add</button>

@@ -51,7 +51,9 @@ export class AnimatedImage implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // prevent memory leak when component destroyed
-    this.startAnimateing.unsubscribe();
+    if (this.startAnimateing) {
+      // prevent memory leak when component destroyed
+      this.startAnimateing.unsubscribe();
+    }
   }
 }
