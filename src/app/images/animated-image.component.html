@@ -1,2 +1,5 @@
-<img class="imgs" @movementtrigger="currentState" (click)="next()" [src]='imgUrl' alt="">
+<img class="imgs" @movementtrigger="currentState" (click)="edit()" (dblclick)="next()" [src]='animated.imgUrl' alt="">
+<p>
+  {{animated.imgUrl}}
+</p>
 <!-- <button class="btn btn-default" (click)="animate()">Animate</button> -->

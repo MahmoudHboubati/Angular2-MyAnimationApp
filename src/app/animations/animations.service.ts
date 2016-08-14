@@ -1,5 +1,23 @@
 import {trigger, state, style, transition, animate} from '@angular/core';
 
+export interface IAnimatedComponent {
+  animated: IAnimationable;
+}
+
+export interface IAnimationable {
+  currentState: number;
+  repeate: number;
+  dueTime: number;
+  period: number;
+}
+
+export class Animated implements IAnimationable {
+  currentState: number = 1;
+  repeate: number = 4;
+  dueTime: number = 100;
+  period: number = 1000;
+}
+
 export class Translate {
   static getTranslate() {
     return 'translate(0px, 0px)';

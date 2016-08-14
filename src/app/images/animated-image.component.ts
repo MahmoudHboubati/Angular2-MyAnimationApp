@@ -1,25 +1,26 @@
 import {Component, trigger, state, style, transition, animate, Input, OnDestroy} from '@angular/core';
-import {Translate} from '../animations/animations.service';
+import {Translate, IAnimatedComponent} from '../animations/animations.service';
 import {Observable} from 'rxjs/Rx';
 import {AnimateEvent, AnimateEventParameter} from '../animations/animate.event';
+import {EditEvent} from '../Editing/edit.event';
+import {Image} from './images.service';
+
 @Component({
   selector: 'animated-img',
   templateUrl: './app/images/animated-image.component.html',
   styleUrls: ['./app/images/animated-image.component.css'],
   animations: [Translate.randomTrigger()],
-  providers: [AnimateEvent]
+  providers: [AnimateEvent, EditEvent]
 })
-export class AnimatedImage implements OnDestroy {
-  @Input() imgUrl: string;
-  @Input() animationType: string = 'random';
-  currentState: number = 1;
-  observableSource: any;
-  repeate: number = 4;
-  dueTime: number = 100;
-  period: number = 1000;
-  startAnimateing: any;
 
-  constructor(private _animateEvent: AnimateEvent) {
+export class AnimatedImageComponent implements OnDestroy, IAnimatedComponent {
+  @Input() animationType: string = 'random';
+
+  startAnimateing: any;
+  observableSource: any;
+
+  @Input() animated: Image;
+  constructor(private _animateEvent: AnimateEvent, private _editEvent: EditEvent) {
     this._animateEvent.on().subscribe(animationParameter => {
       this.animate(animationParameter);
     });
@@ -31,23 +32,27 @@ export class AnimatedImage implements OnDestroy {
   }
 
   next() {
-    if (this.currentState >= 4)
+    if (this.animated.currentState >= 4)
       this.resetCounter();
     else
-      this.currentState++;
+      this.animated.currentState++;
   }
 
   animate(animationParameter: AnimateEventParameter) {
-    this.observableSource = Observable.timer(this.dueTime, this.period)
-      .take(this.repeate);
+    this.observableSource = Observable.timer(this.animated.dueTime, this.animated.period)
+      .take(this.animated.repeate);
     this.startAnimateing = this.observableSource.subscribe(val => {
       this.next();
     }, err => { },
       () => { });
   }
 
+  edit() {
+    this._editEvent.fire(this.animated);
+  }
+
   resetCounter() {
-    this.currentState = 1;
+    this.animated.currentState = 1;
   }
 
   ngOnDestroy() {

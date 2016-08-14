@@ -1,0 +1,5 @@
+<h1>Accela page</h1>
+<div class="row" *ngFor="let rec of records">
+    <!-- id: {{rec.id}} | description: {{rec.description}} -->
+    <record [myRecord]="rec"></record>
+</div>

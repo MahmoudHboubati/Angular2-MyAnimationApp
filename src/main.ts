@@ -4,6 +4,7 @@ import { AppComponent, environment } from './app/';
 import {Broadcaster} from './app/shared/broadcaster.service';
 import { appRouterProviders } from './app/shared/app.routes';
 import { FIREBASE_PROVIDERS, AuthProviders, defaultFirebase } from 'angularfire2';
+import {Http} from '@angular/http';
 
 if (environment.production) {
   enableProdMode();
@@ -16,4 +17,4 @@ bootstrap(AppComponent, [Broadcaster, appRouterProviders, FIREBASE_PROVIDERS,
     databaseURL: "https://myanimationapp.firebaseio.com",
     storageBucket: "firebase-myanimationapp.appspot.com",
   })
-]);
+, Http]);
