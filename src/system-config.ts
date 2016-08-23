@@ -10,7 +10,9 @@
 /** Map relative paths to URLs. */
 const map: any = {
   firebase: 'vendor/firebase/firebase.js',
-  angularfire2: 'vendor/angularfire2'
+  angularfire2: 'vendor/angularfire2',
+  jquery: 'vendor/jquery/dist/jquery.min.js',
+  bootstrap: 'vendor/bootstrap/dist/js/bootstrap.min.js'
 };
 
 /** User packages configuration. */
@@ -58,7 +60,7 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    'main': 'main.js'
+    'main': 'main.js',
   },
   packages: cliSystemConfigPackages
 });
