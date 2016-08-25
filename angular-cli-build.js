@@ -19,8 +19,18 @@ module.exports = function(defaults) {
 
       'jquery/dist/jquery.min.js',
       'bootstrap/dist/js/bootstrap.min.js',
+      'chart.js/**/*.js',
       'angularfire2/**/*.js',
       'firebase/*.js'
+    ],
+    polyfills: [
+      'vendor/es6-shim/es6-shim.js',
+      'vendor/reflect-metadata/Reflect.js',
+      'vendor/systemjs/dist/system.src.js',
+      'vendor/zone.js/dist/zone.js',
+      'vendor/jquery/dist/jquery.min.js',
+      'vendor/bootstrap/dist/js/bootstrap.min.js',
+      'vendor/chart.js/dist/chart.min.js',
     ]
   });
 };

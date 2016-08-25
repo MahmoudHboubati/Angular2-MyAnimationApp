@@ -4,6 +4,7 @@ import {FireBaseComponent} from '../firebase/firebase.component';
 import {PageNotFoundComponent} from './notFound.component';
 import {ExpensesComponent} from '../expenses/expenses.component';
 import {PlannedExpensesComponent} from '../plannedExpenses/plannedExpenses.component';
+import {ExpensesVSPlannedComponent} from '../dashboard/expensesVSplanned.component';
 
 // import {AccelaComponent} from '../accela/accela.component';
 
@@ -12,6 +13,7 @@ const routes: RouterConfig = [
   { path: 'firebase', component: FireBaseComponent },
   { path: 'expenses', component: ExpensesComponent },
   { path: 'plannedExpenses', component: PlannedExpensesComponent },
+  { path: 'expensesVSplanned', component: ExpensesVSPlannedComponent },
 
   // { path: 'accela', component: AccelaComponent },
   { path: '**', component: PageNotFoundComponent }

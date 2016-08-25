@@ -11,8 +11,9 @@
 const map: any = {
   firebase: 'vendor/firebase/firebase.js',
   angularfire2: 'vendor/angularfire2',
-  jquery: 'vendor/jquery/dist/jquery.min.js',
-  bootstrap: 'vendor/bootstrap/dist/js/bootstrap.min.js'
+  jquery: 'vendor/jquery/dist',
+  bootstrap: 'vendor/bootstrap/dist',
+  chartjs: 'vendor/chart.js/dist'
 };
 
 /** User packages configuration. */
@@ -20,6 +21,10 @@ const packages: any = {
   angularfire2: {
     defaultExtension: 'js',
     main: 'angularfire2.js'
+  },
+  chartjs: {
+    defaultExtension: 'js',
+    main: 'Chart.min.js'
   }
 };
 
