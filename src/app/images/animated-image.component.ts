@@ -19,11 +19,15 @@ export class AnimatedImageComponent implements OnDestroy, IAnimatedComponent {
   startAnimateing: any;
   observableSource: any;
 
-  @Input() animated: Image;
+  @Input('animated')
+  animated: Image = null;
+
   constructor(private _animateEvent: AnimateEvent, private _editEvent: EditEvent) {
     this._animateEvent.on().subscribe(animationParameter => {
       this.animate(animationParameter);
     });
+
+    //  console.log('animated:' + this.animated);
   }
 
   /// Returns a random number between min (inclusive) and max (exclusive)
@@ -41,10 +45,7 @@ export class AnimatedImageComponent implements OnDestroy, IAnimatedComponent {
   animate(animationParameter: AnimateEventParameter) {
     this.observableSource = Observable.timer(this.animated.dueTime, this.animated.period)
       .take(this.animated.repeate);
-    this.startAnimateing = this.observableSource.subscribe(val => {
-      this.next();
-    }, err => { },
-      () => { });
+    this.startAnimateing = this.observableSource.subscribe(() => this.next());
   }
 
   edit() {

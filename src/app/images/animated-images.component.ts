@@ -22,9 +22,11 @@ export class AnimatedImagesComponent {
 
   getImages() {
     this.images = this._imagesService.getImages(this.imgWidth, this.imgHieght, this.imagesCount);
+    // console.log(this.images[0].imgUrl);
   }
 
   start() {
+    console.log('started');
     this._animateEvent.fire(new AnimateEventParameter());
   }
 }

@@ -34,8 +34,10 @@
     </div>
   </div>
   <div class="col-sm-12 col-md-8">
-    <div *ngIf="images">
-      <animated-img *ngFor="let image of images" animated="{{image}}"></animated-img>
+    <div *ngIf="images && images.length > 0">
+      <div *ngFor="let image of images">
+        <animated-img [animated]="image"></animated-img>
+      </div>
     </div>
   </div>
 </div>

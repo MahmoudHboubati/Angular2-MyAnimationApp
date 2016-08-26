@@ -13,7 +13,7 @@ export class ImagesService {
 }
 
 export class Image extends Animated {
-  imgUrl: string;
+  public imgUrl: string;
   constructor(imgUrl: string) {
     super()
     this.imgUrl = imgUrl;
