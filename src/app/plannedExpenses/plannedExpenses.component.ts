@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2';
-import {PlannedExpensesService, IPlannedExpenses} from '../shared/services/plannedExpenses.service';
+import {IPlannedExpenses} from '../shared/domain/plannedExpenses.entity';
+import {PlannedExpensesService} from '../shared/services/plannedExpenses.service';
 
 @Component({
   templateUrl: './app/plannedExpenses/plannedExpenses.component.html',

@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {ChartDirective, IChartData} from '../charts/ChartJS.directive';
 import {PlannedExpensesService} from '../shared/services/plannedExpenses.service';
-import {ExpensesService, IExpenses} from '../shared/services/expenses.service';
+import {ExpensesService} from '../shared/services/expenses.service';
+import {IExpenses} from '../shared/domain/expenses.entity';
 import {Observable} from 'rxjs/Rx.KitchenSink';
 import {Operator} from 'rxjs/operator';
 import {FirebaseListObservable} from 'angularfire2';

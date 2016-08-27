@@ -3,10 +3,11 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import {GenericService} from './generic.service';
 import {IGenericEntity} from '../domain/generic.entity';
 import {FirebaseService} from './firebase.service';
-import {IExpenses} from '../domain/expenses.entity';
+import {Income} from '../domain/income.entity';
+
 @Injectable()
-export class ExpensesService extends FirebaseService<IExpenses> {
+export class IncomeService extends FirebaseService<Income> {
   constructor(private af: AngularFire) {
-    super(af.database.list('/expenses'));
+    super(af.database.list('/incomes'));
   }
 }
