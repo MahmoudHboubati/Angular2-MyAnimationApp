@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {ChartDirective, IChartData} from '../charts/ChartJS.directive';
+import {ChartDirective} from '../charts/ChartJS.directive';
+import {IChartData, ChartData, LineChart} from '../charts/chartjs.data';
 import {PlannedExpensesService} from '../shared/services/plannedExpenses.service';
 import {ExpensesService} from '../shared/services/expenses.service';
 import {IExpenses} from '../shared/domain/expenses.entity';
 import {Observable} from 'rxjs/Rx.KitchenSink';
-import {Operator} from 'rxjs/operator';
 import {FirebaseListObservable} from 'angularfire2';
 
 @Component({
@@ -16,14 +16,20 @@ export class ExpensesVSPlannedComponent {
 
   plannedExpenses: any;
   expenses: FirebaseListObservable<IExpenses[]>;
+  data: Observable<IChartData>;
+  lineChart: LineChart;
 
   constructor(plannedExoensesService: PlannedExpensesService, exoensesService: ExpensesService) {
     this.plannedExpenses = plannedExoensesService.get();
     this.expenses = exoensesService.get();
+
+    this.lineChart = new LineChart();
+    // this.lineChart.addDataSet();
+
     this.data = this.expenses.map((next) => {
 
       var months: any[] = [];
-      var ddd: number[] = [];
+      var totalExpenses: number[] = [];
 
       Observable.from<IExpenses>(next).groupBy((k) => {
         return new Date(k.at).getMonth() + 1;
@@ -33,19 +39,13 @@ export class ExpensesVSPlannedComponent {
         a.subscribe((s) => {
           sum += s.amount;
         }, () => { }, () => {
-          ddd.push(sum);
+          totalExpenses.push(sum);
         });
       }).subscribe();
 
-      var chartData: ChartData = new ChartData(ddd, months.sort());
+      var chartData: ChartData = new ChartData(totalExpenses, months.sort());
       return chartData;
     });
   }
 
-  data: Observable<IChartData>;
-}
-
-class ChartData implements IChartData {
-  constructor(public data: any[], public labels: any[]) {
-  }
 }

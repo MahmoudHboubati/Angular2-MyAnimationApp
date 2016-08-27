@@ -1,0 +1,7 @@
+<!-- <select [(ngModel)]="scheduleType" class="form-control" id="scheduleType" required> -->
+<select [(ngModel)]="scheduleType" class="form-control" id="{{id}}" (change)="onChange($event)">
+  <option value="Daily">Daily</option>
+  <option value="Weekly">Weekly</option>
+  <option value="Monthly">Monthly</option>
+  <option value="Yearly">Yearly</option>
+</select>

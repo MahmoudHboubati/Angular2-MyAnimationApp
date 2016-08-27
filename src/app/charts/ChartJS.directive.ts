@@ -2,37 +2,46 @@ import 'chartjs';
 declare let Chart;
 import {Directive, ElementRef, Renderer, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {IChartData} from './chartjs.data';
 
 @Directive({
   selector: '[chart]'
 })
 export class ChartDirective {
+
+  @Input()
+  chData: Observable<IChartData>;
+
   lineChart: any;
   options: any = {
     scales: {
       yAxes: [{ ticks: { beginAtZero: true } }]
     }
   };
-  @Input()
-  chData: Observable<IChartData>;
+
   el: ElementRef;
   type: string = 'line';
+
   constructor(el: ElementRef, renderer: Renderer) {
     this.el = el;
   }
+
   ngAfterViewInit() {
     var myArray = this.chData.subscribe((array) => {
-      var data =
-        {
-          labels: array.labels,
-          datasets: [{
-            label: '# of Expenses',
-            data: array.data,
-            borderWidth: 1
-          }]
-        };
+      var data = this.buildChartData(array);
       this.renderTheChart(data);
     });
+  }
+
+  buildChartData(array) {
+    return {
+      labels: array.labels,
+      datasets: [{
+        label: '# of Expenses',
+        data: array.data,
+        borderWidth: 1
+      }]
+    };
   }
 
   renderTheChart(data) {
@@ -43,9 +52,4 @@ export class ChartDirective {
       options: this.options
     });
   }
-}
-
-export interface IChartData {
-  data: any[];
-  labels: any[];
 }

@@ -8,6 +8,9 @@ import {Income} from '../domain/income.entity';
 @Injectable()
 export class IncomeService extends FirebaseService<Income> {
   constructor(private af: AngularFire) {
-    super(af.database.list('/incomes'));
+    super();
+  }
+  get() {
+    return this.af.database.list('/incomes');
   }
 }

@@ -6,6 +6,9 @@ import {IPlannedExpenses} from '../domain/plannedExpenses.entity';
 @Injectable()
 export class PlannedExpensesService extends FirebaseService<IPlannedExpenses> {
   constructor(private af: AngularFire) {
-    super(af.database.list('/plannedExpenses'));
+    super();
+  }
+  get() {
+    return this.af.database.list('/plannedExpenses');
   }
 }
